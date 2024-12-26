@@ -26,7 +26,7 @@ alias pull='myrsync -m pull -c'
 ## 使用
 
 ```
-# 在强磁场 可以使用push
+# 在引力 可以使用push
 push <文件夹 | 文件名 | 正则表达式>
 
 # 在强磁场 可以使用pull
