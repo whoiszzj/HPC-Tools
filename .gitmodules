@@ -1,0 +1,3 @@
+[submodule "SafeRemove"]
+	path = SafeRemove
+	url = git@github.com:whoiszzj/SafeRemove.git
