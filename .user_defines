@@ -1,0 +1,62 @@
+############### tools ###############
+# email
+export PATH=$HOME/work/EmailServe/dist:$PATH
+# myrsync
+export PATH=$HOME/work/MyRsync/dist:$PATH
+# saferemove
+export PATH=$HOME/work/SafeRemove/dist:$PATH
+# nrun
+export PATH=$HOME/work/NohupRun/dist:$PATH
+# mysync
+export PATH=$HOME/work/MyRsync/dist/myrsync
+
+############### aliases ###############
+alias rr='saferemove'
+alias ll='ls -l'
+alias lll='ls -al'
+alias rrr='rm -rf'
+alias gpu='watch -n 0.5 nvidia-smi'
+alias correct_mod='find ./* -type f -exec chmod 664 {} \; && find ./* -type d -exec chmod 755 {} \; '
+alias rrr='rm -rf'
+alias correct_mod='find ./* -type f -exec chmod 664 {} \; && find ./* -type d -exec chmod 755 {} \; '
+alias gpu='watch -n 0.5 nvidia-smi'
+alias tlog='tensorboard --port 23456 --load_fast=false --logdir'
+alias malloc_cpu='sbatch $HOME/work/MallocDevice/malloc_cpu.sh'
+alias malloc_1gpu='sbatch $HOME/work/MallocDevice/malloc_1gpu.sh'
+alias malloc_2gpu='sbatch $HOME/work/MallocDevice/malloc_2gpu.sh'
+alias malloc_3gpu='sbatch $HOME/work/MallocDevice/malloc_3gpu.sh'
+alias malloc_4gpu='sbatch $HOME/work/MallocDevice/malloc_4gpu.sh'
+alias mrun='matlab -nodisplay -nosplash -nodesktop -r'
+alias myps='ps -o ruser=$USER -e -o pid,c,stime,tty,stat,time,cmd | grep $USER'
+alias mysqueue='squeue -u $USER'
+alias htop='htop -u $USER -t'
+alias push='myrsync -m push -c'
+alias pull='myrsync -m pull -c'
+
+############### scripts ###############
+count_files() {
+    local dir=${1:-.}
+    find "$dir" -type d -exec sh -c '
+        count=$(find "{}" -maxdepth 1 -type f | wc -l)
+        [ "$count" -gt 0 ] && echo "{}: $count"
+    ' \;
+}
+count_dirs() {
+    local dir=${1:-.}
+    find "$dir" -type d -exec sh -c '
+        count=$(find "{}" -mindepth 1 -maxdepth 1 -type d | wc -l)
+        [ "$count" -gt 0 ] && echo "{}: $count"
+    ' \;
+}
+# watch log from nrun
+wlog(){
+    tail -f -n `wc -l $1` \;
+};
+
+#####################################
+#    usage in .bashrc or .zshrc     #
+#####################################
+# if [ -f ~/.user_defines ]; then   #
+#     . ~/.user_defines             #
+# fi                                #
+#####################################
